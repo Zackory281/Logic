@@ -24,14 +24,9 @@ struct Result: Hashable {
 	var grade: Int8
 }
 
-enum Condition: String {
-	case IsTrue = "Is True"
-	case IsFalse = "Is False"
-}
-
-enum Derivation {
+enum Query {
+	indirect case And(op1: Query, op2: Query)
+	indirect case Or(op1: Query, op2: Query)
+	indirect case Not(op: Query)
 	case Is(query: Predicate)
-	indirect case And(op1: Derivation, op2: Derivation)
-	indirect case Or(op1: Derivation, op2: Derivation)
-	indirect case Not(op: Derivation)
 }

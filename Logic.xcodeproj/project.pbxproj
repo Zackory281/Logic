@@ -11,7 +11,7 @@
 		F2D927D2218C15BB00594037 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D1218C15BB00594037 /* Predicate.swift */; };
 		F2D927D4218C172900594037 /* Vocab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D3218C172900594037 /* Vocab.swift */; };
 		F2D927D6218C1A4300594037 /* LogicSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D5218C1A4300594037 /* LogicSystem.swift */; };
-		F2D927D8218C1B6500594037 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D7218C1B6500594037 /* Fact.swift */; };
+		F2D927D8218C1B6500594037 /* Facts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D7218C1B6500594037 /* Facts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +32,7 @@
 		F2D927D1218C15BB00594037 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		F2D927D3218C172900594037 /* Vocab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab.swift; sourceTree = "<group>"; };
 		F2D927D5218C1A4300594037 /* LogicSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSystem.swift; sourceTree = "<group>"; };
-		F2D927D7218C1B6500594037 /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
+		F2D927D7218C1B6500594037 /* Facts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 				F2D927D1218C15BB00594037 /* Predicate.swift */,
 				F2D927D3218C172900594037 /* Vocab.swift */,
 				F2D927D5218C1A4300594037 /* LogicSystem.swift */,
-				F2D927D7218C1B6500594037 /* Fact.swift */,
+				F2D927D7218C1B6500594037 /* Facts.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -133,7 +133,7 @@
 			files = (
 				F2D927CB218C152B00594037 /* main.swift in Sources */,
 				F2D927D2218C15BB00594037 /* Predicate.swift in Sources */,
-				F2D927D8218C1B6500594037 /* Fact.swift in Sources */,
+				F2D927D8218C1B6500594037 /* Facts.swift in Sources */,
 				F2D927D4218C172900594037 /* Vocab.swift in Sources */,
 				F2D927D6218C1A4300594037 /* LogicSystem.swift in Sources */,
 			);

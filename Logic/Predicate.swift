@@ -18,7 +18,7 @@ class Predicate: Hashable {
 		_condition = condition
 	}
 	
-	static func == (lhs: Predicate, rhs: Predicate) -> Bool {
+	static func ==(lhs: Predicate, rhs: Predicate) -> Bool {
 		return lhs._condition == rhs._condition &&
 		lhs._noun == rhs._noun
 	}
