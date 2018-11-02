@@ -31,19 +31,12 @@ class Fact: Hashable {
 	}
 	
 	static func == (lhs: Fact, rhs: Fact) -> Bool {
-		switch (lhs._result, rhs._result) {
-		case let (.Boolean(b1, g1), .Boolean(b2, g2)):
-			if (b1 != b2 || g1 != g2) {
-				return false
-			}
-		default:
-			return false
-		}
-		return lhs._predicate == rhs._predicate
+		return lhs._predicate == rhs._predicate &&
+		lhs._result == rhs._result
 	}
 	
 	func hash(into hasher: inout Hasher) {
 		hasher.combine(_predicate)
-		hasher.combine(bytes: _result)
+		hasher.combine(_result)
 	}
 }

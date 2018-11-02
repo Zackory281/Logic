@@ -13,3 +13,4 @@ let p2 = Predicate(noun: .B, condition: .IsTrue)
 
 print(p1 == p2)
 print("\(p1.hashValue), \(p2.hashValue)")
+

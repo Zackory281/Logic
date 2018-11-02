@@ -18,6 +18,10 @@ class LogicSystem {
 		_facts = facts
 	}
 	
+	func deriveFor(simpleQuery: Predicate) {
+		
+	}
+	
 	func evaluateAll() {
 		
 	}

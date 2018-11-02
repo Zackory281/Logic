@@ -19,20 +19,19 @@ enum Noun: Int {
 	}
 }
 
-enum Result {
-	case Boolean(bool: Bool, grade: Int)
-	case Number(num: Int16, grade: Int)
-//	func not() -> Result {
-//		switch self {
-//		case let .True(g):
-//			return .False(grade: g)
-//		case let .False(g):
-//			return .False(grade: g)
-//		}
-//	}
+struct Result: Hashable {
+	var bool: Bool
+	var grade: Int8
 }
 
 enum Condition: String {
 	case IsTrue = "Is True"
 	case IsFalse = "Is False"
+}
+
+enum Derivation {
+	case Is(query: Predicate)
+	indirect case And(op1: Derivation, op2: Derivation)
+	indirect case Or(op1: Derivation, op2: Derivation)
+	indirect case Not(op: Derivation)
 }
