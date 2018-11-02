@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F2D927CB218C152B00594037 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927CA218C152B00594037 /* main.swift */; };
+		F2D927D2218C15BB00594037 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D1218C15BB00594037 /* Predicate.swift */; };
+		F2D927D4218C172900594037 /* Vocab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D3218C172900594037 /* Vocab.swift */; };
+		F2D927D6218C1A4300594037 /* LogicSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D5218C1A4300594037 /* LogicSystem.swift */; };
+		F2D927D8218C1B6500594037 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D7218C1B6500594037 /* Fact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,10 @@
 /* Begin PBXFileReference section */
 		F2D927C7218C152B00594037 /* Logic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Logic; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D927CA218C152B00594037 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F2D927D1218C15BB00594037 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
+		F2D927D3218C172900594037 /* Vocab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab.swift; sourceTree = "<group>"; };
+		F2D927D5218C1A4300594037 /* LogicSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSystem.swift; sourceTree = "<group>"; };
+		F2D927D7218C1B6500594037 /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				F2D927CA218C152B00594037 /* main.swift */,
+				F2D927D1218C15BB00594037 /* Predicate.swift */,
+				F2D927D3218C172900594037 /* Vocab.swift */,
+				F2D927D5218C1A4300594037 /* LogicSystem.swift */,
+				F2D927D7218C1B6500594037 /* Fact.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -120,6 +132,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2D927CB218C152B00594037 /* main.swift in Sources */,
+				F2D927D2218C15BB00594037 /* Predicate.swift in Sources */,
+				F2D927D8218C1B6500594037 /* Fact.swift in Sources */,
+				F2D927D4218C172900594037 /* Vocab.swift in Sources */,
+				F2D927D6218C1A4300594037 /* LogicSystem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
