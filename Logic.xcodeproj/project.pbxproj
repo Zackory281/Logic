@@ -47,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F20E9D23218E18DF002C36CC /* test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = test.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryExpander.swift; sourceTree = "<group>"; };
 		F2D76B70218CFE0B00349AE1 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		F2D76B76218D3FEE00349AE1 /* T */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = T; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +132,7 @@
 				F2D927D1218C15BB00594037 /* Predicate.swift */,
 				F2D927D3218C172900594037 /* Vocab.swift */,
 				F2D927D5218C1A4300594037 /* LogicSystem.swift */,
+				F20E9D23218E18DF002C36CC /* test.playground */,
 				F2D927D7218C1B6500594037 /* Facts.swift */,
 				F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */,
 				F2D76B70218CFE0B00349AE1 /* Stack.swift */,

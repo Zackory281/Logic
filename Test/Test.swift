@@ -35,6 +35,39 @@ class Test: XCTestCase {
 		XCTAssertFalse(stack.stack(1))
 	}
 	
+	func testRemoval3() {
+		for i in 1...10 {
+			XCTAssert(stack.stack(i))
+			XCTAssertEqual(i, stack.size())
+		}
+		
+		XCTAssert(stack.remove(2))
+		XCTAssert(stack.remove(4))
+		XCTAssert(stack.remove(6))
+		XCTAssert(stack.remove(8))
+		
+		stack.clearAllRemovals()
+		
+		XCTAssertEqual(6, stack.size())
+		XCTAssertEqual(10, stack.pop())
+		
+		XCTAssertEqual(5, stack.size())
+		XCTAssertEqual(9, stack.pop())
+		
+		XCTAssertEqual(4, stack.size())
+		XCTAssertEqual(7, stack.pop())
+		
+		XCTAssertEqual(3, stack.size())
+		XCTAssertEqual(5, stack.pop())
+		
+		XCTAssertEqual(2, stack.size())
+		XCTAssert(stack.remove(1))
+		XCTAssertEqual(1, stack.size())
+		
+		XCTAssertEqual(3, stack.pop())
+		XCTAssertEqual(0, stack.size())
+	}
+	
 	func testRemoval2() {
 		for i in 1...10 {
 			XCTAssert(stack.stack(i))

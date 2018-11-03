@@ -10,106 +10,198 @@ import Foundation
 
 class LogicSystem {
 	
-	private let _facts: Facts
-	private var _predicates: [Predicate]
-	private var _queries: SetStack<Query>
+//	private let _facts: Dictionary<Premise, Predicate>
+//	private var _solvedPreds: Set<Predicate>
+//	private var _queryToPredMap: Dictionary<Premise, Predicate>
+//	private var _predicates: SetStack<Predicate>
+	private var _premises: SetStack<Premise>
 	
-	init() {
-		_predicates = []
-		_facts = Facts()
-		_queries = SetStack<Query>()
-		_shouldEvalute = false
+//	func addFact(_ query: Query, _ result: Result) {
+//		_facts.addEvaluatedQuery(query, result)
+//	}
+//
+	func addPremise(_ premise: Premise) {
+		let _ = _premises.stack(premise)
 	}
+//	func addPredicate(_ predicate: Predicate) {
+//		guard _predicates.stack(predicate) else {
+//			print("Inserting an already stacked predicate: ", predicate)
+//			return
+//		}
+//		_queryToPredMap[predicate.getQuery()] = predicate
+//		if predicate.isSolved() {
+//			_facts.addEvaluatedQuery(predicate.getQuery(), predicate.getResult()!)
+//		} else {
+//			stackRequestedQuery(predicate.getQuery())
+//		}
+//	}
 	
-	func addFact(_ query: Query, _ result: Result) {
-		_facts.addEvaluatedQuery(query, result)
-	}
-	
-	func addQuery(_ query: Query) {
-		let _ = _queries.stack(query)
-	}
-	
-	func addPredicate(_ predicate: Predicate) {
-		_predicates.append(predicate)
-	}
-	
-	var _poppedQuery: Query?
+	var _poppedPremise: Query?
 	var _shouldEvalute: Bool
+	
 	func evaluateAll() {
 		//while let _poppedPredicate = _predicates.popLast()
 		_shouldEvalute = true
-		while _shouldEvalute, let query = _queries.pop() {
-			_poppedQuery = query
-			if _facts.hasEvaluatedQuery(query) {
-				print("already evaluated")
-				continue
+		while _shouldEvalute, let predicate = _predicates.pop() {
+			stackRequestedQuery(predicate.getQuery())
+			while _shouldEvalute, let query = _queries.pop() {
+				printFacts()
+				printQueries()
+				_poppedQuery = query
+				if _facts.hasEvaluatedQuery(query) {
+					print("already evaluated")
+					continue
+				}
+				switch query {
+				case let .And(q1: q1, q2: q2):
+					evaluateAnd(q1, q2)
+					continue
+				case let .Is(q: q):
+					evaluateIs(q)
+					continue
+				case let .Not(q: q):
+					evaluateNot(q)
+					continue
+				case .IsTrue:
+					evaluateIsTrue()
+					continue
+				default:
+					_shouldEvalute = false
+					print("unexpected Query")
+					break
+				}
 			}
-			switch query {
-			case let .And(q1: q1, q2: q2):
-				evaluateAnd(q1, q2)
-				continue
-			case let .Is(q: q):
-				evaluateIs(q)
-				continue
-			case .IsTrue:
-				evaluateIsTrue()
-				continue
-			default:
-				_shouldEvalute = false
-				print("unexpected Query")
-				break
+			if _shouldEvalute {
+				predicate.setResult(_facts.resultForQuery(predicate.getQuery())!)
+				_solvedPreds.insert(predicate)
 			}
 		}
+		
+	}
+	
+	func printFacts() {
+		_//facts.printFacts();
+	}
+	
+	func printQueries() {
+		print("Queries =====")
+		//_queries.printStack()
+	}
+	
+	func printPredicates() {
+		print("Predicates =====")
+//		for p in _solvedPreds {
+//			print(p.description)
+//		}
+	}
+	
+	init() {
+//		_facts = Facts()
+//		_solvedPreds = Set<Predicate>()
+//		_queryToPredMap = Dictionary<Query, Predicate>()
+//		_predicates = SetStack<Predicate>()
+//		_queries = SetStack<Query>()
+		_premises = SetStack<Premise>()
+		_shouldEvalute = false
 	}
 	
 	/**
-	* Stack the popped Query on top of the stack.
-	* Only call this when you made sure the query
-	* to add is unevaluated.
-	*/
-	private func stackOnQueries(_ query: Query, discardPopped: Bool = false) {
+	 * Stack the popped Query on top of the stack.
+	 * Only call this when you made sure the query
+	 * to add is unevaluated.
+	 */
+	private func stackDerivedQuery(_ quety: Query, discardPopped: Bool = false) {
 		if !discardPopped, let popped = _poppedQuery {
 			if !_queries.stack(popped) {
 				print("mesteryous existing: ", popped)
 			}
 		}
 		if !_queries.stack(query) {
-			print("Self defining query \(query)")
-			_shouldEvalute = false
+			declareSelfEvaluate(on: query)
 			return
 		}
 	}
 	
-	func printFacts() {
-		_facts.printFacts();
+	/**
+	 * Stack the user requested query from predicate to be process.
+	 */
+	private func stackRequestedQuery(_ query: Query) {
+		let _ = _queries.stack(query)
 	}
 	
-	func printQueries() {
-		//_queries.printQueries()
+	/**
+	* Stack the user requested predicate to be process.
+	*/
+//	private func stackRequestedPredicate(_ pred: Predicate) {
+//		guard pred.getResult() == nil else {
+//			print("Predicate: ", pred, " already evaluated.")
+//			return
+//		}
+//		if _predicates.stack(pred) {
+//			_queryToPredMap[pred.getQuery()] = pred
+//			stackRequestedQuery(pred.getQuery())
+//		}
+//	}
+	
+	/**
+	 * Add the (Query, Result) pair to the facts Dictionary. Update the predicates possibly.
+	 */
+	private func setEvaluationForQuery(_ query: Query, _ result: Result) {
+		if _facts.hasEvaluatedQuery(query) && _facts.resultForQuery(query) != result {
+			declareContradtion(on: query, with: result)
+		}
+		_facts.addEvaluatedQuery(query, result)
 	}
 	
+	/**
+	 * Recognize the contradtion.
+	 */
+	private func declareContradtion(on query: Query, with result: Result) {
+		print("Detected contradting query: ", query, ", with result: ", result)
+		_shouldEvalute = false
+	}
+	
+	/**
+	* Recognize the self evaluation.
+	*/
+	private func declareSelfEvaluate(on query: Query) {
+		print("Detected self evaluating query: ", query)
+		_shouldEvalute = false
+		print("Tracing down stack for query attached to predicates with tipping result")
+		for p in _queryToPredMap.values {
+			if let tip = p.getTippingResult() {
+				setEvaluationForQuery(p.getQuery(), tip)
+				_shouldEvalute = true
+			}
+		}
+//		if (
+//		var traceQuery: Query? = query
+//		repeat {
+//
+//		} while (traceQuery = _queries.pop(), 1).0 != nil
+	}
 }
 
 extension LogicSystem {
-	func evaluateAnd(_ q1: Query, _ q2: Query) {
+	private func evaluateAnd(_ q1: Query, _ q2: Query) {
 		if !_facts.hasEvaluatedQuery(q1) {
-			stackOnQueries(q1)
+			stackDerivedQuery(q1)
 			return
 		}
 		if !_facts.hasEvaluatedQuery(q2) {
-			stackOnQueries(q2)
+			stackDerivedQuery(q2)
 			return
 		}
 		_facts.addEvaluatedQuery(_poppedQuery!, _facts.resultForQuery(q1)! & _facts.resultForQuery(q2)!)
 	}
 	
-	func evaluateIs(_ q: Query) {
+	private func evaluateIs(_ q: Query) {
 		if let res = _facts.resultForQuery(q) {
 			_facts.addEvaluatedQuery(_poppedQuery!, res)
 			return
 		}
 		if let expansion = QueryExander.getExandedQuery(_poppedQuery!) {
-			stackOnQueries(expansion)
+			stackDerivedQuery(expansion)
 			return
 		} else {
 			_shouldEvalute = false
@@ -117,13 +209,21 @@ extension LogicSystem {
 		}
 	}
 	
-	func evaluateIsTrue() {
+	private func evaluateNot(_ q: Query) {
+		if let res = _facts.resultForQuery(q) {
+			_facts.addEvaluatedQuery(_poppedQuery!, res.opposite(res))
+			return
+		}
+		stackDerivedQuery(q)
+	}
+	
+	private func evaluateIsTrue() {
 		if let expansion = QueryExander.getExandedQuery(_poppedQuery!) {
 			if let res = _facts.resultForQuery(expansion) {
 				_facts.addEvaluatedQuery(_poppedQuery!, res)
 				return
 			}
-			stackOnQueries(expansion)
+			stackDerivedQuery(expansion)
 			return
 		} else {
 			_shouldEvalute = false

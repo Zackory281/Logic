@@ -12,9 +12,9 @@ class Facts: Hashable {
 	
 	private var _facts = Dictionary<Query, Result>()
 	
-	func addEvaluatedPredicate(_ predicate: Predicate, _ result: Result) {
-		_facts[predicate.getQuery()] = result
-	}
+//	func addEvaluatedPredicate(_ predicate: Predicate, _ result: Result) {
+//		_facts[predicate.getQuery()] = result
+//	}
 	
 	func hasEvaluatedQuery(_ query: Query) -> Bool {
 		return _facts[query] != nil

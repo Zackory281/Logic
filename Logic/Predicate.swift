@@ -8,10 +8,22 @@
 
 import Foundation
 
-class Predicate: Hashable {
+class Predicate: NSObject {
 	
-	let _query: Query
-	let _tippingResult: Result?
+	override var description: String {
+		var str = "Query: \(String(describing: _query))"
+		if let res = _result {
+			str.append(", Result: \(String(describing: res))")
+		}
+		if let tip = _tippingResult {
+			str.append(", Tip: \(String(describing: tip))")
+		}
+		return str
+	}
+	
+	private let _query: Query
+	private var _result: Result?
+	private let _tippingResult: Result?
 	
 	func getQuery() -> Query {
 		return _query
@@ -21,16 +33,21 @@ class Predicate: Hashable {
 		return _tippingResult
 	}
 	
-	init(query: Query, tippingResult: Result? = nil) {
+	func getResult() -> Result? {
+		return _result
+	}
+	
+	func setResult(_ result: Result) {
+		_result = result
+	}
+	
+	func isSolved() -> Bool {
+		return _result != nil
+	}
+	
+	init(query: Query, result: Result? = nil, tippingResult: Result? = nil) {
 		_query = query
 		_tippingResult = tippingResult
-	}
-	
-	static func ==(lhs: Predicate, rhs: Predicate) -> Bool {
-		return lhs._query == rhs._query
-	}
-	
-	func hash(into hasher: inout Hasher) {
-		hasher.combine(_query)
+		_result = result
 	}
 }

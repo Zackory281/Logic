@@ -60,14 +60,16 @@ public class SetStack<T: Hashable> {
 		guard !_set.contains(t) else {
 			return false
 		}
-		clearRemoval(until: t)
+		if _toRemove.contains(t) {
+			clearRemoval(until: t)
+		}
 		_size += 1
 		_set.insert(t)
-		_head = StackNode(element: t, _head)
+		_head._next = StackNode(element: t, _head._next)
 		return true
 	}
 	
-	func remove(_ t: T) -> Bool{
+	func remove(_ t: T) -> Bool {
 		guard _set.contains(t) else {
 			return false
 		}
@@ -104,9 +106,50 @@ public class SetStack<T: Hashable> {
 		return _size
 	}
 	
+	// TODO: Needs optimization.
+	func clearStack(until element: T) -> Bool {
+		guard _head._next != nil else { return false }
+		while _head._next?.element() != element {
+			if _toRemove.contains(_head._next!.element()) {
+				clearRemovalFromHead()
+			} else {
+				let n = _head._next!
+				_toRemove.remove(n.element())
+				_head._next = _head._next!._next
+			}
+		}
+		if _head._next?.element() == element {
+			let n = _head._next!
+			_toRemove.remove(n.element())
+			_head._next = _head._next!._next
+			return true
+		}
+		return false //no element to remove until
+	}
+	
+	func printStack() {
+		var head = _head
+		while head._next != nil {
+			let e = head._next!.element()
+			if _toRemove.remove(e) != nil {
+				head._next = head._next?._next ?? nil
+			} else {
+				print(e)
+			}
+			head = head._next!
+		}
+	}
+	
 	/** Only call if CPU is very free. */
 	func clearAllRemovals() {
-		
+		var head = _head
+		while head._next != nil {
+			let e = head._next!.element()
+			if _toRemove.remove(e) != nil {
+				head._next = head._next?._next ?? nil
+			}
+			head = head._next!
+		}
 	}
 	
 	init() {
@@ -116,14 +159,6 @@ public class SetStack<T: Hashable> {
 		_toRemove = Set<T>()
 	}
 	
-	private func clearRemoval(from: StackNode<T>) {
-		var head:StackNode<T>? = from._next
-		while let e = head?.element(), _toRemove.contains(e) {
-			head = head?._next
-			_toRemove.remove(e)
-		}
-	}
-	
 	private func clearRemovalFromHead() {
 		while let e = _head._next?.element(), _toRemove.contains(e) {
 			_head._next = _head._next?._next
@@ -131,25 +166,49 @@ public class SetStack<T: Hashable> {
 		}
 	}
 	
-	private func clearRemoval(until node: T) {
-//		guard _toRemove.contains(node) else { return }
-//		clearRemovalFromHead()
-//		guard var head = _head else { return }
+	private func clearRemoval(until element: T) {
 		var head = _head
 		while head._next != nil {
 			let e = head._next!.element()
 			if _toRemove.remove(e) != nil {
 				head._next = head._next?._next ?? nil
-				if e == node {
+				if e == element {
 					return
 				}
 			}
 			head = head._next!
 		}
-		repeat {
-			head = head._next!
-		} while head._next != nil
-		print("iterated all stack but no remove element: ", node)
+		if _size != 0 {
+			print("iterated all stack but no remove element: ", element)
+		}
+	}
+}
+
+class Stack<T> {
+	private var _head:StackNode = EmptyStackNode<T>(nil)
+	
+	func stack(_ t: T) {
+		_head._next = StackNode<T>(element: t, _head._next)
+	}
+	
+	func stack(_ t: [T]) {
+		for i in t {
+			_head._next = StackNode<T>(element: i, _head._next)
+		}
+	}
+	
+	func peek() -> T? {
+		return _head._next?.element()
+	}
+	
+	func pop() -> T? {
+		guard let e = _head._next?.element() else { return nil }
+		_head._next = _head._next!._next
+		return e
+	}
+	
+	func isEmpty() -> Bool {
+		return _head._next == nil
 	}
 }
 
