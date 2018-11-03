@@ -8,9 +8,16 @@
 
 import Foundation
 
-let p1 = Predicate(noun: .A, condition: .IsTrue)
-let p2 = Predicate(noun: .B, condition: .IsTrue)
+let p1 = Predicate(query: .IsTrue(n: .A))
 
-print(p1 == p2)
-print("\(p1.hashValue), \(p2.hashValue)")
+let logic = LogicSystem()
+logic.addFact(.IsTrue(n: .A), Result.init(bool: true, grade: 3))
+logic.addPredicate(Predicate(query: Query.IsTrue(n: .B), tippingResult: Result(bool: false, grade: -1)))
+logic.evaluateAll()
+logic.printQueries()
+logic.printFacts()
+
+
+
+//print("\(p1.hashValue), \(p2.hashValue)")
 

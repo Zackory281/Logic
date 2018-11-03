@@ -10,18 +10,29 @@ import Foundation
 
 class Facts: Hashable {
 	
-	private var _facts = Dictionary<Predicate, Result>()
+	private var _facts = Dictionary<Query, Result>()
 	
 	func addEvaluatedPredicate(_ predicate: Predicate, _ result: Result) {
-		_facts[predicate] = result
+		_facts[predicate.getQuery()] = result
 	}
 	
-	func hasEvaluatedPredicate(predicate: Predicate) -> Bool {
-		return _facts[predicate] != nil
+	func hasEvaluatedQuery(_ query: Query) -> Bool {
+		return _facts[query] != nil
 	}
 	
-	func resultForPredicate(_ predicate: Predicate) -> Result? {
-		return _facts[predicate]
+	func resultForQuery(_ query: Query) -> Result? {
+		return _facts[query]
+	}
+	
+	func addEvaluatedQuery(_ query: Query, _ result: Result) {
+		_facts[query] = result
+	}
+	
+	func printFacts() {
+		print("Facts   =====")
+		for (q, r) in _facts {
+			print("\(q) is \(r)")
+		}
 	}
 	
 	func hash(into hasher: inout Hasher) {
