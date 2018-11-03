@@ -8,7 +8,7 @@
 
 import Foundation
 
-let p1 = Predicate(query: .IsTrue(n: .A))
+let p1 = Predicate(query: .IsTrue(.A))
 
 let logic = LogicSystem()
 //let fact1 = Predicate(query: .IsTrue(n: .A), result: nil)
