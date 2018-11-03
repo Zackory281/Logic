@@ -84,16 +84,22 @@ extension Result {
 	}
 }
 
-class Premise: NSObject {
+class Premise: Hashable {
+	
 	let _query: Query
-	private var _result: Result?
-	private var _valid: Bool
 	weak var _prev: Premise?
-	var _next: [Premise]
+	
+	func getQuery() -> Query {
+		return _query
+	}
+	
+	func getPrevPremise() -> Premise? {
+		return _prev
+	}
 	
 	/* Invalidate the current premise and return the next chain of
      */
-	func invalidate() -> Premise? {
+	/*func invalidate() -> Premise? {
 		_valid = true
 //		let premiseStack = Stack<Premise>()
 //		premiseStack.stack(_next)
@@ -112,9 +118,9 @@ class Premise: NSObject {
 			p = p!._prev
 		}
 		return p
-	}
+	}*/
 	
-	func hasEvaluated() -> Bool {
+	/*func hasEvaluated() -> Bool {
 		return _valid && _result != nil
 	}
 	
@@ -134,12 +140,19 @@ class Premise: NSObject {
 	
 	func getResult() -> Result? {
 		return _result
-	}
+	}*/
 	
 	init(_ query: Query) {
 		_query = query
-		_valid = false
-		_next = []
+		//_valid = false
+	}
+	
+	static func == (lhs: Premise, rhs: Premise) -> Bool {
+		return lhs._query == rhs._query
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(_query)
 	}
 }
 
@@ -147,9 +160,9 @@ enum Query: Equatable, Hashable, CustomStringConvertible {
 	
 	var description: String {
 		switch self {
-		case let .And(q1: q1, q2: q2):
+		case let .And(q1, q2):
 			return "(\(q1) and \(q2))"
-		case let .Or(q1: q1, q2):
+		case let .Or(q1, q2):
 			return "(\(q1) or \(q2))"
 		case let .Not(q1):
 			return "(not \(q1)"
@@ -160,13 +173,17 @@ enum Query: Equatable, Hashable, CustomStringConvertible {
 		}
 	}
 	
-	case And(q1: Premise, q2: Premise)
-	case Or(q1: Premise, q2: Premise)
-	case Not(q: Premise)
-	case Is(q: Premise)
-	case IsTrue(n: Noun)
+	case And(Premise, Premise)
+	case Or(Premise, Premise)
+	case Not(Premise)
+	case Is(Premise)
+	case IsTrue(Noun)
 //	case And(p1: Predicate, p2: Predicate)
 //	case Or(p1: Predicate, p2: Predicate)
 //	case Not(p: Predicate)
 //	case Is(query: Predicate)
+}
+
+class Condition {
+	
 }

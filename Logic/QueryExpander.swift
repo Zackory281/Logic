@@ -10,10 +10,10 @@ import Foundation
 
 class QueryExander {
 	
-	static func getExandedQuery(_ query: Query) -> Query? {
-		switch query {
-		case let Query.IsTrue(n: n):
-			return .Not(q: .IsTrue(n: n.next())) //Query.And(q1: .IsTrue(n: n.next()), q2: .IsTrue(n: n.next().next()))//
+	static func getExandedQuery(_ premise: Premise) -> Premise? {
+		switch premise.getQuery() {
+		case let Query.IsTrue(n):
+			return Premise(.IsTrue(n.next())) //Query.And(q1: .IsTrue(n: n.next()), q2: .IsTrue(n: n.next().next()))//
 		default:
 			return nil
 		}

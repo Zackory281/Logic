@@ -10,7 +10,7 @@ import Foundation
 
 class LogicSystem {
 	
-//	private let _facts: Dictionary<Premise, Predicate>
+	private let _facts: Facts
 //	private var _solvedPreds: Set<Predicate>
 //	private var _queryToPredMap: Dictionary<Premise, Predicate>
 //	private var _predicates: SetStack<Predicate>
@@ -36,51 +36,50 @@ class LogicSystem {
 //		}
 //	}
 	
-	var _poppedPremise: Query?
+	var _poppedPremise: Premise?
 	var _shouldEvalute: Bool
 	
 	func evaluateAll() {
 		//while let _poppedPredicate = _predicates.popLast()
 		_shouldEvalute = true
-		while _shouldEvalute, let predicate = _predicates.pop() {
-			stackRequestedQuery(predicate.getQuery())
-			while _shouldEvalute, let query = _queries.pop() {
-				printFacts()
-				printQueries()
-				_poppedQuery = query
-				if _facts.hasEvaluatedQuery(query) {
-					print("already evaluated")
-					continue
-				}
-				switch query {
-				case let .And(q1: q1, q2: q2):
-					evaluateAnd(q1, q2)
-					continue
-				case let .Is(q: q):
-					evaluateIs(q)
-					continue
-				case let .Not(q: q):
-					evaluateNot(q)
-					continue
-				case .IsTrue:
-					evaluateIsTrue()
-					continue
-				default:
-					_shouldEvalute = false
-					print("unexpected Query")
-					break
-				}
+		//while _shouldEvalute, let predicate = _predicates.pop() {
+			//stackRequestedQuery(predicate.getQuery())
+		while _shouldEvalute, let premise = _premises.pop() {
+			printFacts()
+			printQueries()
+			_poppedPremise = premise
+			if _facts.hasEvaluatedPremise(premise) {
+				print("already evaluated")
+				continue
 			}
-			if _shouldEvalute {
-				predicate.setResult(_facts.resultForQuery(predicate.getQuery())!)
-				_solvedPreds.insert(predicate)
+			switch premise.getQuery() {
+			case let .And(q1: q1, q2: q2):
+				evaluateAnd(q1, q2)
+				continue
+			case let .Is(q: q):
+				evaluateIs(q)
+				continue
+			case let .Not(q: q):
+				evaluateNot(q)
+				continue
+			case .IsTrue:
+				evaluateIsTrue()
+				continue
+			default:
+				_shouldEvalute = false
+				print("unexpected Query")
+				break
 			}
+		}
+		if _shouldEvalute {
+			predicate.setResult(_facts.resultForQuery(predicate.getQuery())!)
+			_solvedPreds.insert(predicate)
 		}
 		
 	}
 	
 	func printFacts() {
-		_//facts.printFacts();
+		_facts.printFacts();
 	}
 	
 	func printQueries() {
@@ -96,7 +95,7 @@ class LogicSystem {
 	}
 	
 	init() {
-//		_facts = Facts()
+		_facts = Facts()
 //		_solvedPreds = Set<Predicate>()
 //		_queryToPredMap = Dictionary<Query, Predicate>()
 //		_predicates = SetStack<Predicate>()
