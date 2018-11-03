@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F20E9D25218E54C7002C36CC /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D24218E54C7002C36CC /* Evaluator.swift */; };
 		F2D76B6F218CEBF200349AE1 /* QueryExpander.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */; };
 		F2D76B71218CFE0B00349AE1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B70218CFE0B00349AE1 /* Stack.swift */; };
 		F2D76B79218D3FEE00349AE1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B78218D3FEE00349AE1 /* main.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		F20E9D23218E18DF002C36CC /* test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = test.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F20E9D24218E54C7002C36CC /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
 		F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryExpander.swift; sourceTree = "<group>"; };
 		F2D76B70218CFE0B00349AE1 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		F2D76B76218D3FEE00349AE1 /* T */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = T; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +138,7 @@
 				F2D927D7218C1B6500594037 /* Facts.swift */,
 				F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */,
 				F2D76B70218CFE0B00349AE1 /* Stack.swift */,
+				F20E9D24218E54C7002C36CC /* Evaluator.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				F2D76B6F218CEBF200349AE1 /* QueryExpander.swift in Sources */,
 				F2D927D2218C15BB00594037 /* Predicate.swift in Sources */,
 				F2D927D8218C1B6500594037 /* Facts.swift in Sources */,
+				F20E9D25218E54C7002C36CC /* Evaluator.swift in Sources */,
 				F2D927D4218C172900594037 /* Vocab.swift in Sources */,
 				F2D927D6218C1A4300594037 /* LogicSystem.swift in Sources */,
 			);
