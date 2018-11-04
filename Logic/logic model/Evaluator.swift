@@ -43,14 +43,18 @@ class Evaluator {
 		_shouldEvalute = true
 		while _shouldEvalute, let poppedPremise = _premises.pop() {
 			_poppedPremise = poppedPremise
+			_evaluations += 1
 			if let r = evaluateOnFacts(poppedPremise) {
 				imposeResult(premise: poppedPremise, result: r)
 				continue
 			}
+			_delegateChecking += 1
 			if let q = poppedPremise.getCustomQuery(), let r = _assertionDelegate?.evaluateOnAssertionDelegate(q) {
 				imposeResult(premise: poppedPremise, result: r)
+				
 				continue
 			}
+			_derivations += 1
 			if let derivePremises = QueryExander.getDerivedPremises(poppedPremise, _facts), !derivePremises.isEmpty {
 				stackDerivedPremises(derivePremises)
 				continue
@@ -70,7 +74,15 @@ class Evaluator {
 		_premises.printStack()
 	}
 	
+	func printMeta() {
+		print("Evaluations: ", _evaluations)
+		print("Derivations: ", _derivations)
+		print("Fact Checking: ", _factChecking)
+		print("Delegate Checking: ", _delegateChecking)
+	}
+	
 	func evaluateOnFacts(_ premise: Premise) -> Result? {
+		_factChecking += 1
 		if let res = _facts.resultForPremise(premise) {
 			return res
 		}
@@ -148,4 +160,10 @@ class Evaluator {
 			_premiseGraph.addElementWithParent(_poppedPremise!, premise)
 		}
 	}
+	
+	// Meta, _drivations, _factChecking
+	private var _evaluations:Int = 0
+	private var _derivations:Int = 0
+	private var _factChecking:Int = 0
+	private var _delegateChecking:Int = 0
 }

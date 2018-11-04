@@ -26,9 +26,8 @@ class Test: XCTestCase {
 		let d = DummyModel()
 		let logic = LogicSystem(d)
 		logic.addPremise(Premise(CustomQuery.HasObjectAt(0, 0)))
-		logic.printPremises()
 		logic.evaluateAll()
-		logic.printFacts()
+		logic.printEverything()
 	}
 	
 	func testFalse() {

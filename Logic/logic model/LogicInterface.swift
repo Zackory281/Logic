@@ -9,16 +9,16 @@
 import Foundation
 
 enum CustomQuery: Hashable {
-	case IsEmptySquare(Int, Int)
-	case WillMove(Int, Int)
-	case HasObjectAt(Int, Int)
+	case IsEmptySquare(IntC, IntC)
+	case CanMove(IntC, IntC, Direction)
+	case HasObjectAt(IntC, IntC)
 	
 	var description: String {
 		switch self {
 		case let .IsEmptySquare(x, y):
 			return "Is Empty Square at \(x), \(y)"
-		case let .WillMove(x, y):
-			return "Will Move at \(x), \(y)"
+		case let .CanMove(x, y, d):
+			return "Will Move at \(x), \(y), \(d)"
 		case let .HasObjectAt(x, y):
 			return "Has Object at \(x), \(y)"
 		}
@@ -46,8 +46,17 @@ class AssertionCurry {
 extension QueryExander {
 	static func getDerivedCustomPremises(_ query: CustomQuery) -> Premise? {
 		switch query {
-		case let .WillMove(x, y):
-			return Premise(.IsEmptySquare(x + 1, y))
+		case let .CanMove(x, y, d):
+			switch (d) {
+			case .UP:
+				return Premise(.IsEmptySquare(x, y + 1))
+			case .RIGHT:
+				return Premise(.IsEmptySquare(x + 1, y))
+			case .DOWN:
+				return Premise(.IsEmptySquare(x, y - 1))
+			case .LEFT:
+				return Premise(.IsEmptySquare(x - 1, y))
+			}
 		default:
 			return nil
 		}
@@ -55,6 +64,6 @@ extension QueryExander {
 }
 
 protocol AssertionDelegate: NSObjectProtocol {
-	func isEmptySquare(_ x: Int, _ y: Int) -> Bool
-	func hasObjectAt(_ x: Int, _ y: Int) -> Bool
+	func isEmptySquare(_ x: IntC, _ y: IntC) -> Bool
+	func hasObjectAt(_ x: IntC, _ y: IntC) -> Bool
 }

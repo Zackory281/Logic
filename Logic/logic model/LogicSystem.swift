@@ -37,6 +37,12 @@ class LogicSystem {
 		_evaluator.printPremises()
 	}
 	
+	func printEverything() {
+		_evaluator.printFacts()
+		_evaluator.printPremises()
+		_evaluator.printMeta()
+	}
+	
 	init(_ delegate: AssertionDelegate? = nil) {
 		_evaluator = Evaluator(AssertionCurry.init(delegate))
 		_shouldEvalute = false

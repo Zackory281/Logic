@@ -16,8 +16,7 @@ let pre2 = Premise(.IsTrue(.B))
 logic.addFact(pre1, Result(true, 3))
 logic.addPremise(pre2)
 logic.evaluateAll()
-logic.printFacts()
-logic.printPredicates()
+logic.printEverything()
 
 
 
