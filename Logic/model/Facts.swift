@@ -20,8 +20,11 @@ class Facts: Hashable {
 		return _premises[premise]
 	}
 	
+	/// Adds the evaluated fact to the dictionary.
+	/// - Returns: Wether the premise was successfully inserted, false otherwise.
+	///
 	func addEvaluatedPremise(_ premise: Premise, _ result: Result) -> Bool {
-		guard _premises[premise] != nil else { return false }
+		guard _premises[premise] == nil else { return _premises[premise] == result }
 		_premises[premise] = result
 		return true
 	}

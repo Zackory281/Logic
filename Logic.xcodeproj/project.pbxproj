@@ -8,16 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		F20E9D25218E54C7002C36CC /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D24218E54C7002C36CC /* Evaluator.swift */; };
-		F2D76B6F218CEBF200349AE1 /* QueryExpander.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */; };
+		F20E9D27218E5A4B002C36CC /* TreeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D26218E5A4B002C36CC /* TreeGraph.swift */; };
+		F20E9D28218E6744002C36CC /* TreeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D26218E5A4B002C36CC /* TreeGraph.swift */; };
+		F20E9D2C218EB59F002C36CC /* LogicInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D2B218EB59F002C36CC /* LogicInterface.swift */; };
+		F2267390218EB7E9006A02A5 /* PremiseTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F226738F218EB7E9006A02A5 /* PremiseTable.swift */; };
+		F2D76B6F218CEBF200349AE1 /* PremiseExpander.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */; };
 		F2D76B71218CFE0B00349AE1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B70218CFE0B00349AE1 /* Stack.swift */; };
 		F2D76B79218D3FEE00349AE1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B78218D3FEE00349AE1 /* main.swift */; };
 		F2D76B84218D401300349AE1 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B83218D401300349AE1 /* Test.swift */; };
-		F2D76B89218D404700349AE1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927CA218C152B00594037 /* main.swift */; };
-		F2D76B8A218D404700349AE1 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D1218C15BB00594037 /* Predicate.swift */; };
-		F2D76B8B218D404700349AE1 /* Vocab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D3218C172900594037 /* Vocab.swift */; };
-		F2D76B8C218D404700349AE1 /* LogicSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D5218C1A4300594037 /* LogicSystem.swift */; };
-		F2D76B8D218D404700349AE1 /* Facts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D7218C1B6500594037 /* Facts.swift */; };
-		F2D76B8E218D404700349AE1 /* QueryExpander.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */; };
 		F2D76B8F218D404700349AE1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B70218CFE0B00349AE1 /* Stack.swift */; };
 		F2D927CB218C152B00594037 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927CA218C152B00594037 /* main.swift */; };
 		F2D927D2218C15BB00594037 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D1218C15BB00594037 /* Predicate.swift */; };
@@ -50,7 +48,10 @@
 /* Begin PBXFileReference section */
 		F20E9D23218E18DF002C36CC /* test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = test.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F20E9D24218E54C7002C36CC /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
-		F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryExpander.swift; sourceTree = "<group>"; };
+		F20E9D26218E5A4B002C36CC /* TreeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeGraph.swift; sourceTree = "<group>"; };
+		F20E9D2B218EB59F002C36CC /* LogicInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicInterface.swift; sourceTree = "<group>"; };
+		F226738F218EB7E9006A02A5 /* PremiseTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PremiseTable.swift; sourceTree = "<group>"; };
+		F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiseExpander.swift; sourceTree = "<group>"; };
 		F2D76B70218CFE0B00349AE1 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		F2D76B76218D3FEE00349AE1 /* T */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = T; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D76B78218D3FEE00349AE1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -90,6 +91,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F20E9D2D218EB6C4002C36CC /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F2D927D3218C172900594037 /* Vocab.swift */,
+				F226738F218EB7E9006A02A5 /* PremiseTable.swift */,
+				F2D927D1218C15BB00594037 /* Predicate.swift */,
+				F2D927D5218C1A4300594037 /* LogicSystem.swift */,
+				F2D927D7218C1B6500594037 /* Facts.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		F2D76B77218D3FEE00349AE1 /* T */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,15 +143,14 @@
 		F2D927C9218C152B00594037 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				F20E9D2D218EB6C4002C36CC /* model */,
 				F2D927CA218C152B00594037 /* main.swift */,
-				F2D927D1218C15BB00594037 /* Predicate.swift */,
-				F2D927D3218C172900594037 /* Vocab.swift */,
-				F2D927D5218C1A4300594037 /* LogicSystem.swift */,
 				F20E9D23218E18DF002C36CC /* test.playground */,
-				F2D927D7218C1B6500594037 /* Facts.swift */,
-				F2D76B6E218CEBF200349AE1 /* QueryExpander.swift */,
+				F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */,
 				F2D76B70218CFE0B00349AE1 /* Stack.swift */,
 				F20E9D24218E54C7002C36CC /* Evaluator.swift */,
+				F20E9D26218E5A4B002C36CC /* TreeGraph.swift */,
+				F20E9D2B218EB59F002C36CC /* LogicInterface.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -260,12 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2D76B89218D404700349AE1 /* main.swift in Sources */,
-				F2D76B8A218D404700349AE1 /* Predicate.swift in Sources */,
-				F2D76B8B218D404700349AE1 /* Vocab.swift in Sources */,
-				F2D76B8C218D404700349AE1 /* LogicSystem.swift in Sources */,
-				F2D76B8D218D404700349AE1 /* Facts.swift in Sources */,
-				F2D76B8E218D404700349AE1 /* QueryExpander.swift in Sources */,
+				F20E9D28218E6744002C36CC /* TreeGraph.swift in Sources */,
 				F2D76B8F218D404700349AE1 /* Stack.swift in Sources */,
 				F2D76B84218D401300349AE1 /* Test.swift in Sources */,
 			);
@@ -277,10 +284,13 @@
 			files = (
 				F2D927CB218C152B00594037 /* main.swift in Sources */,
 				F2D76B71218CFE0B00349AE1 /* Stack.swift in Sources */,
-				F2D76B6F218CEBF200349AE1 /* QueryExpander.swift in Sources */,
+				F2267390218EB7E9006A02A5 /* PremiseTable.swift in Sources */,
+				F2D76B6F218CEBF200349AE1 /* PremiseExpander.swift in Sources */,
+				F20E9D2C218EB59F002C36CC /* LogicInterface.swift in Sources */,
 				F2D927D2218C15BB00594037 /* Predicate.swift in Sources */,
 				F2D927D8218C1B6500594037 /* Facts.swift in Sources */,
 				F20E9D25218E54C7002C36CC /* Evaluator.swift in Sources */,
+				F20E9D27218E5A4B002C36CC /* TreeGraph.swift in Sources */,
 				F2D927D4218C172900594037 /* Vocab.swift in Sources */,
 				F2D927D6218C1A4300594037 /* LogicSystem.swift in Sources */,
 			);

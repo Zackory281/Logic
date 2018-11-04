@@ -8,46 +8,46 @@
 
 import Foundation
 
-class Queries {
-	
-	private var _querySet = Set<Query>()
-	private var _queries:[Query] = []
-	
-	func addQuery(_ query:Query) {
-		guard !existsQuery(query) else {
-			print("Predicate \(query) already exists");
-			return }
-		_queries.append(query)
-		_querySet.insert(query)
-	}
-	
-	func deleteQuery(_ query: Query) {
-		guard existsQuery(query) else { print("query doesn't exist \(query)"); return}
-		_querySet.remove(query)
-		//_queries.remove(at: _queries.firstIndex(of: query)!)
-	}
-	
-	func existsQuery(_ query: Query) -> Bool {
-		return _querySet.contains(query)
-	}
-	
-	func peek() -> Query? {
-		return _queries.last
-	}
-	
-	@discardableResult
-	func pop() -> Query? {
-		guard let pop = _queries.popLast() else { return nil }
-		return _querySet.remove(pop)!
-	}
-	
-	func printQueries() {
-		print("Queries =====")
-		for q in _queries {
-			print(q)
-		}
-	}
-}
+//class Queries {
+//	
+//	private var _querySet = Set<Query>()
+//	private var _queries:[Query] = []
+//	
+//	func addQuery(_ query:Query) {
+//		guard !existsQuery(query) else {
+//			print("Predicate \(query) already exists");
+//			return }
+//		_queries.append(query)
+//		_querySet.insert(query)
+//	}
+//	
+//	func deleteQuery(_ query: Query) {
+//		guard existsQuery(query) else { print("query doesn't exist \(query)"); return}
+//		_querySet.remove(query)
+//		//_queries.remove(at: _queries.firstIndex(of: query)!)
+//	}
+//	
+//	func existsQuery(_ query: Query) -> Bool {
+//		return _querySet.contains(query)
+//	}
+//	
+//	func peek() -> Query? {
+//		return _queries.last
+//	}
+//	
+//	@discardableResult
+//	func pop() -> Query? {
+//		guard let pop = _queries.popLast() else { return nil }
+//		return _querySet.remove(pop)!
+//	}
+//	
+//	func printQueries() {
+//		print("Queries =====")
+//		for q in _queries {
+//			print(q)
+//		}
+//	}
+//}
 
 public class SetStack<T: Hashable> {
 	
@@ -184,7 +184,7 @@ public class SetStack<T: Hashable> {
 	}
 }
 
-class Stack<T> {
+class Stack<T: Hashable> {
 	private var _head:StackNode = EmptyStackNode<T>(nil)
 	
 	func stack(_ t: T) {
@@ -192,6 +192,12 @@ class Stack<T> {
 	}
 	
 	func stack(_ t: [T]) {
+		for i in t {
+			_head._next = StackNode<T>(element: i, _head._next)
+		}
+	}
+	
+	func stack(_ t: Set<T>) {
 		for i in t {
 			_head._next = StackNode<T>(element: i, _head._next)
 		}

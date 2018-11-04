@@ -11,14 +11,13 @@ import Foundation
 let p1 = Predicate(query: .IsTrue(.A))
 
 let logic = LogicSystem()
-//let fact1 = Predicate(query: .IsTrue(n: .A), result: nil)
-//let query1 = Predicate(query: .IsTrue(n: .B), result: nil, tippingResult: Result(bool: false, grade: -1))
-//logic.addPredicate(fact1)
-//logic.addPredicate(query1)
-//logic.evaluateAll()
-//logic.printQueries()
-//logic.printFacts()
-//logic.printPredicates()
+let pre1 = Premise(.IsTrue(.A))
+let pre2 = Premise(.IsTrue(.B))
+logic.addFact(pre1, Result(true, 3))
+logic.addPremise(pre2)
+logic.evaluateAll()
+logic.printFacts()
+logic.printPredicates()
 
 
 
