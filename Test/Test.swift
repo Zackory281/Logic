@@ -22,6 +22,15 @@ class Test: XCTestCase {
         super.tearDown()
 	}
 	
+	func testDelegate() {
+		let d = DummyModel()
+		let logic = LogicSystem(d)
+		logic.addPremise(Premise(CustomQuery.HasObjectAt(0, 0)))
+		logic.printPremises()
+		logic.evaluateAll()
+		logic.printFacts()
+	}
+	
 	func testFalse() {
 		for i in 1...10 {
 			XCTAssert(stack.stack(i))

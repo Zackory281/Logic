@@ -9,14 +9,25 @@
 /* Begin PBXBuildFile section */
 		F20E9D25218E54C7002C36CC /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D24218E54C7002C36CC /* Evaluator.swift */; };
 		F20E9D27218E5A4B002C36CC /* TreeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D26218E5A4B002C36CC /* TreeGraph.swift */; };
-		F20E9D28218E6744002C36CC /* TreeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D26218E5A4B002C36CC /* TreeGraph.swift */; };
 		F20E9D2C218EB59F002C36CC /* LogicInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D2B218EB59F002C36CC /* LogicInterface.swift */; };
 		F2267390218EB7E9006A02A5 /* PremiseTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F226738F218EB7E9006A02A5 /* PremiseTable.swift */; };
+		F2267392218EC2A9006A02A5 /* DelegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2267391218EC2A9006A02A5 /* DelegateTest.swift */; };
+		F2267393218EC2D0006A02A5 /* LogicInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D2B218EB59F002C36CC /* LogicInterface.swift */; };
+		F2267395218EC4A8006A02A5 /* TestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2267394218EC4A8006A02A5 /* TestDelegate.swift */; };
+		F2267396218EC575006A02A5 /* PremiseExpander.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */; };
+		F2267397218EC575006A02A5 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B70218CFE0B00349AE1 /* Stack.swift */; };
+		F2267398218EC575006A02A5 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D24218E54C7002C36CC /* Evaluator.swift */; };
+		F2267399218EC575006A02A5 /* TreeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E9D26218E5A4B002C36CC /* TreeGraph.swift */; };
+		F226739A218EC575006A02A5 /* Vocab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D3218C172900594037 /* Vocab.swift */; };
+		F226739B218EC575006A02A5 /* PremiseTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F226738F218EB7E9006A02A5 /* PremiseTable.swift */; };
+		F226739C218EC575006A02A5 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D1218C15BB00594037 /* Predicate.swift */; };
+		F226739D218EC575006A02A5 /* LogicSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D5218C1A4300594037 /* LogicSystem.swift */; };
+		F226739E218EC575006A02A5 /* Facts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D7218C1B6500594037 /* Facts.swift */; };
+		F226739F218EC63F006A02A5 /* TestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2267394218EC4A8006A02A5 /* TestDelegate.swift */; };
 		F2D76B6F218CEBF200349AE1 /* PremiseExpander.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */; };
 		F2D76B71218CFE0B00349AE1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B70218CFE0B00349AE1 /* Stack.swift */; };
 		F2D76B79218D3FEE00349AE1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B78218D3FEE00349AE1 /* main.swift */; };
 		F2D76B84218D401300349AE1 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B83218D401300349AE1 /* Test.swift */; };
-		F2D76B8F218D404700349AE1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D76B70218CFE0B00349AE1 /* Stack.swift */; };
 		F2D927CB218C152B00594037 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927CA218C152B00594037 /* main.swift */; };
 		F2D927D2218C15BB00594037 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D1218C15BB00594037 /* Predicate.swift */; };
 		F2D927D4218C172900594037 /* Vocab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D927D3218C172900594037 /* Vocab.swift */; };
@@ -51,6 +62,8 @@
 		F20E9D26218E5A4B002C36CC /* TreeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeGraph.swift; sourceTree = "<group>"; };
 		F20E9D2B218EB59F002C36CC /* LogicInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicInterface.swift; sourceTree = "<group>"; };
 		F226738F218EB7E9006A02A5 /* PremiseTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PremiseTable.swift; sourceTree = "<group>"; };
+		F2267391218EC2A9006A02A5 /* DelegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateTest.swift; sourceTree = "<group>"; };
+		F2267394218EC4A8006A02A5 /* TestDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDelegate.swift; sourceTree = "<group>"; };
 		F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiseExpander.swift; sourceTree = "<group>"; };
 		F2D76B70218CFE0B00349AE1 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		F2D76B76218D3FEE00349AE1 /* T */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = T; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +107,11 @@
 		F20E9D2D218EB6C4002C36CC /* model */ = {
 			isa = PBXGroup;
 			children = (
+				F20E9D2B218EB59F002C36CC /* LogicInterface.swift */,
+				F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */,
+				F2D76B70218CFE0B00349AE1 /* Stack.swift */,
+				F20E9D24218E54C7002C36CC /* Evaluator.swift */,
+				F20E9D26218E5A4B002C36CC /* TreeGraph.swift */,
 				F2D927D3218C172900594037 /* Vocab.swift */,
 				F226738F218EB7E9006A02A5 /* PremiseTable.swift */,
 				F2D927D1218C15BB00594037 /* Predicate.swift */,
@@ -116,6 +134,7 @@
 			children = (
 				F2D76B83218D401300349AE1 /* Test.swift */,
 				F2D76B85218D401300349AE1 /* Info.plist */,
+				F2267391218EC2A9006A02A5 /* DelegateTest.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -146,11 +165,7 @@
 				F20E9D2D218EB6C4002C36CC /* model */,
 				F2D927CA218C152B00594037 /* main.swift */,
 				F20E9D23218E18DF002C36CC /* test.playground */,
-				F2D76B6E218CEBF200349AE1 /* PremiseExpander.swift */,
-				F2D76B70218CFE0B00349AE1 /* Stack.swift */,
-				F20E9D24218E54C7002C36CC /* Evaluator.swift */,
-				F20E9D26218E5A4B002C36CC /* TreeGraph.swift */,
-				F20E9D2B218EB59F002C36CC /* LogicInterface.swift */,
+				F2267394218EC4A8006A02A5 /* TestDelegate.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -272,8 +287,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F20E9D28218E6744002C36CC /* TreeGraph.swift in Sources */,
-				F2D76B8F218D404700349AE1 /* Stack.swift in Sources */,
+				F226739F218EC63F006A02A5 /* TestDelegate.swift in Sources */,
+				F2267396218EC575006A02A5 /* PremiseExpander.swift in Sources */,
+				F2267397218EC575006A02A5 /* Stack.swift in Sources */,
+				F2267398218EC575006A02A5 /* Evaluator.swift in Sources */,
+				F2267399218EC575006A02A5 /* TreeGraph.swift in Sources */,
+				F226739A218EC575006A02A5 /* Vocab.swift in Sources */,
+				F226739B218EC575006A02A5 /* PremiseTable.swift in Sources */,
+				F226739C218EC575006A02A5 /* Predicate.swift in Sources */,
+				F226739D218EC575006A02A5 /* LogicSystem.swift in Sources */,
+				F226739E218EC575006A02A5 /* Facts.swift in Sources */,
+				F2267393218EC2D0006A02A5 /* LogicInterface.swift in Sources */,
+				F2267392218EC2A9006A02A5 /* DelegateTest.swift in Sources */,
 				F2D76B84218D401300349AE1 /* Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +315,7 @@
 				F2D927D2218C15BB00594037 /* Predicate.swift in Sources */,
 				F2D927D8218C1B6500594037 /* Facts.swift in Sources */,
 				F20E9D25218E54C7002C36CC /* Evaluator.swift in Sources */,
+				F2267395218EC4A8006A02A5 /* TestDelegate.swift in Sources */,
 				F20E9D27218E5A4B002C36CC /* TreeGraph.swift in Sources */,
 				F2D927D4218C172900594037 /* Vocab.swift in Sources */,
 				F2D927D6218C1A4300594037 /* LogicSystem.swift in Sources */,

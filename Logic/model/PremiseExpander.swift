@@ -11,6 +11,12 @@ import Foundation
 class QueryExander {
 	
 	static func getDerivedPremises(_ premise: Premise, _ facts: Facts) -> [Premise]? {
+		if let cq = premise.getCustomQuery() {
+			guard let p = getDerivedCustomPremises(cq) else {
+				return nil
+			}
+			return [p]
+		}
 		if let query = premise.getQuery() {
 			switch query {
 			case let Query.IsTrue(n):

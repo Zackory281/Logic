@@ -11,6 +11,7 @@ import Foundation
 class LogicSystem {
 	
 	private var _evaluator: Evaluator
+	private var _assertionCurryer: AssertionCurry?
 	
 	func addFact(_ premise: Premise, _ result: Result) {
 		_evaluator.addFact(premise, result)
@@ -19,42 +20,25 @@ class LogicSystem {
 	func addPremise(_ premise: Premise) {
 		_evaluator.addPremise(premise)
 	}
-//	func addPredicate(_ predicate: Predicate) {
-//		guard _predicates.stack(predicate) else {
-//			print("Inserting an already stacked predicate: ", predicate)
-//			return
-//		}
-//		_queryToPredMap[predicate.getQuery()] = predicate
-//		if predicate.isSolved() {
-//			_facts.addEvaluatedQuery(predicate.getQuery(), predicate.getResult()!)
-//		} else {
-//			stackRequestedQuery(predicate.getQuery())
-//		}
-//	}
 	
 	var _poppedPremise: Premise?
 	var _shouldEvalute: Bool
 	
 	func evaluateAll() {
-		//while let _poppedPredicate = _predicates.popLast()
 		_shouldEvalute = true
 		_evaluator.evaluateAll()
-		//while _shouldEvalute, let predicate = _predicates.pop() {
-			//stackRequestedQuery(predicate.getQuery())
-		
-		
 	}
 	
 	func printFacts() {
 		_evaluator.printFacts()
 	}
 	
-	func printPredicates() {
+	func printPremises() {
 		_evaluator.printPremises()
 	}
 	
-	init() {
-		_evaluator = Evaluator()
+	init(_ delegate: AssertionDelegate? = nil) {
+		_evaluator = Evaluator(AssertionCurry.init(delegate))
 		_shouldEvalute = false
 	}
 	
@@ -98,29 +82,6 @@ class LogicSystem {
 //		}
 //		_facts.addEvaluatedQuery(query, result)
 //	}
-	
-	/**
-	 * Recognize the contradtion.
-	 */
-	private func declareContradtion(on query: Query, with result: Result) {
-		print("Detected contradting query: ", query, ", with result: ", result)
-		_shouldEvalute = false
-	}
-	
-	/**
-	* Recognize the self evaluation.
-	*/
-	private func declareSelfEvaluate(on query: Query) {
-		print("Detected self evaluating query: ", query)
-		_shouldEvalute = false
-		print("Tracing down stack for query attached to predicates with tipping result")
-//		for p in _queryToPredMap.values {
-//			if let tip = p.getTippingResult() {
-//				setEvaluationForQuery(p.getQuery(), tip)
-//				_shouldEvalute = true
-//			}
-//		}
-	}
 }
 
 extension LogicSystem {

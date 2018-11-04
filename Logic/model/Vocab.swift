@@ -64,27 +64,39 @@ extension Result {
 
 class Premise: Hashable, CustomStringConvertible {
 	
-	var description: String { return _query?.description ?? "No query!" }
+	var description: String { return _query?.description ?? _customQuery!.description }
 	let _query: Query?
+	let _customQuery: CustomQuery?
 	
 	func hasQuery() -> Bool {
 		return _query != nil
 	}
+	
 	func getQuery() -> Query? {
 		return _query
 	}
 	
+	func getCustomQuery() -> CustomQuery? {
+		return _customQuery
+	}
+	
 	init(_ query: Query?) {
 		_query = query
-		//_valid = false
+		_customQuery = nil
+	}
+	
+	init(_ query: CustomQuery?) {
+		_customQuery = query
+		_query = nil
 	}
 	
 	static func == (lhs: Premise, rhs: Premise) -> Bool {
-		return lhs._query == rhs._query
+		return lhs._query == rhs._query && lhs._customQuery == rhs._customQuery
 	}
 	
 	func hash(into hasher: inout Hasher) {
 		hasher.combine(_query)
+		hasher.combine(_customQuery)
 	}
 }
 

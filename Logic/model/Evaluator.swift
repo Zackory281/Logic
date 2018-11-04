@@ -18,6 +18,8 @@ class Evaluator {
 	private var _poppedPremise: Premise?
 	private var _shouldEvalute: Bool = false
 	
+	private var _assertionDelegate: AssertionCurry?
+	
 	func addFact(_ premise: Premise, _ result: Result) {
 		if !_facts.addEvaluatedPremise(premise, result) {
 			print("Premise already in factionary. ", premise, result)
@@ -42,19 +44,21 @@ class Evaluator {
 		while _shouldEvalute, let poppedPremise = _premises.pop() {
 			_poppedPremise = poppedPremise
 			if let r = evaluateOnFacts(poppedPremise) {
-				if !_facts.addEvaluatedPremise(poppedPremise, r) {
-					declareContradtion(on: poppedPremise, with: r)
-				}
+				imposeResult(premise: poppedPremise, result: r)
 				continue
 			}
-			print("Premise not derivable on facts, attempt to expand: ", poppedPremise)
-			if let derivePremises = QueryExander.getDerivedPremises(poppedPremise, _facts) {
+			if let q = poppedPremise.getCustomQuery(), let r = _assertionDelegate?.evaluateOnAssertionDelegate(q) {
+				imposeResult(premise: poppedPremise, result: r)
+				continue
+			}
+			if let derivePremises = QueryExander.getDerivedPremises(poppedPremise, _facts), !derivePremises.isEmpty {
 				stackDerivedPremises(derivePremises)
 				continue
 			}
 			print("no derivable premises, ", poppedPremise, " is unevaluatable.")
 			_shouldEvalute = false
 		}
+		_poppedPremise = nil
 	}
 	
 	func printFacts() {
@@ -98,6 +102,16 @@ class Evaluator {
 		}
 		//print("not query this is bad! Again!")
 		return nil
+	}
+	
+	init(_ assertionCurry: AssertionCurry? = nil) {
+		_assertionDelegate = assertionCurry
+	}
+	
+	private func imposeResult(premise: Premise, result: Result) {
+		if !_facts.addEvaluatedPremise(premise, result) {
+			declareContradtion(on: premise, with: result)
+		}
 	}
 	
 	/**

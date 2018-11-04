@@ -32,7 +32,7 @@ class Facts: Hashable {
 	func printFacts() {
 		print("Facts   =====")
 		for (q, r) in _premises {
-			print("\(q) is \(r)")
+			print("\(q.description) is \(r)")
 		}
 	}
 	
