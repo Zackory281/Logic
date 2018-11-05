@@ -216,6 +216,12 @@ class Stack<T: Hashable> {
 	func isEmpty() -> Bool {
 		return _head._next == nil
 	}
+	
+	init() {}
+	
+	init(_ elements: [T]) {
+		stack(elements)
+	}
 }
 
 class StackNode<T> {
