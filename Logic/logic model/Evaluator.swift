@@ -12,6 +12,7 @@ class Evaluator {
 	
 	private let _facts = Facts()
 	private let _premises = SetStack<Premise>()
+	private var _toEvaluatePremises = Set<Premise>()
 	private let _premiseGraph = TreeGraph<Premise>()
 	private let _premiseDirection = PremiseTable()
 	
@@ -32,8 +33,8 @@ class Evaluator {
 			print("Premise is a duplicate in graph: ", premise)
 			return true
 		}
-		guard _premises.stack(premise) else {
-			print("Premise is a duplicate in stack: ", premise)
+		guard _toEvaluatePremises.insert(premise).0 else {
+			print("Premise is a duplicate in set: ", premise)
 			return true
 		}
 		return false
@@ -41,28 +42,53 @@ class Evaluator {
 	
 	func evaluateAll() {
 		_shouldEvalute = true
-		while _shouldEvalute, let poppedPremise = _premises.pop() {
-			_poppedPremise = poppedPremise
-			_evaluations += 1
-			if let r = evaluateOnFacts(poppedPremise) {
-				imposeResult(premise: poppedPremise, result: r)
-				continue
+		while _shouldEvalute, let toEvalPremise = _toEvaluatePremises.first {
+			guard _premises.stack(toEvalPremise) else {
+				print("Premises stack should be empty...")
+				return
 			}
-			_delegateChecking += 1
-			if let q = poppedPremise.getCustomQuery(), let r = _assertionDelegate?.evaluateOnAssertionDelegate(q) {
-				imposeResult(premise: poppedPremise, result: r)
-				
-				continue
+			while _shouldEvalute, let poppedPremise = _premises.pop() {
+				_poppedPremise = poppedPremise
+				print("evaluating: ", poppedPremise)
+				_evaluations += 1
+				if let r = evaluateOnFacts(poppedPremise) {
+					imposeResult(premise: poppedPremise, result: r)
+					continue
+				}
+				_delegateChecking += 1
+				if let q = poppedPremise.getCustomQuery(), let derivation = _assertionDelegate?.evaluateOnAssertionDelegate(q) {
+					switch derivation {
+					case let .Result(result):
+						imposeResult(premise: poppedPremise, result: result)
+					case let .Premise(premise):
+						stackDerivedPremises([premise], discardPopped: false)
+					}
+					continue
+				}
+				_derivations += 1
+				if let derivePremises = QueryExander.getDerivedPremises(poppedPremise, _facts), !derivePremises.isEmpty {
+					stackDerivedPremises(derivePremises)
+					continue
+				}
+				print("no derivable premises, ", poppedPremise, " is unevaluatable.")
+				_shouldEvalute = false
 			}
-			_derivations += 1
-			if let derivePremises = QueryExander.getDerivedPremises(poppedPremise, _facts), !derivePremises.isEmpty {
-				stackDerivedPremises(derivePremises)
-				continue
-			}
-			print("no derivable premises, ", poppedPremise, " is unevaluatable.")
-			_shouldEvalute = false
+			_poppedPremise = nil
+			_toEvaluatePremises.remove(toEvalPremise)
 		}
-		_poppedPremise = nil
+	}
+	
+	func clearEvaluations() {
+		_premiseGraph.clearAll()
+		_facts.removeAll()
+		_evaluations = 0
+		_derivations = 0
+		_factChecking = 0
+		_delegateChecking = 0
+	}
+	
+	func getFactionary() -> Facts {
+		return _facts
 	}
 	
 	func printFacts() {
@@ -72,6 +98,11 @@ class Evaluator {
 	func printPremises() {
 		print("Premises =====")
 		_premises.printStack()
+	}
+	
+	func printUnevaluatedPremises() {
+		print("Unevaluated Premises")
+		print(_toEvaluatePremises)
 	}
 	
 	func printMeta() {
@@ -112,7 +143,9 @@ class Evaluator {
 				return nil
 			}
 		}
-		//print("not query this is bad! Again!")
+		if let cond = _premiseGraph.getParents(premise)?.first, let res = _facts.resultForPremise(cond) {
+			return res
+		}
 		return nil
 	}
 	
@@ -139,6 +172,8 @@ class Evaluator {
 	*/
 	private func declareSelfEvaluation(on premise: Premise) {
 		print("Detected self evaluating premise: ", premise)
+		print("Premise Stack Trace")
+		printPremises()
 		_shouldEvalute = false
 	}
 	

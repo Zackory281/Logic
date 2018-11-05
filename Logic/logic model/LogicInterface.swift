@@ -9,31 +9,28 @@
 import Foundation
 
 enum CustomQuery: Hashable {
-	case IsEmptySquare(IntC, IntC)
-	case CanMove(IntC, IntC, Direction)
-	case HasObjectAt(IntC, IntC)
+	case IsUntakenSquare(PathNode, Direction)
+	case ShapeNowMove(ShapeNode)
 	
 	var description: String {
 		switch self {
-		case let .IsEmptySquare(x, y):
-			return "Is Empty Square at \(x), \(y)"
-		case let .CanMove(x, y, d):
-			return "Will Move at \(x), \(y), \(d)"
-		case let .HasObjectAt(x, y):
-			return "Has Object at \(x), \(y)"
+		case let .IsUntakenSquare(pathNode, ed):
+			return "Square untaken at \(pathNode) expcept \(ed)"
+		case let .ShapeNowMove(shapeNode):
+			return "Shape now move at \(shapeNode)"
 		}
 	}
 }
 
 class AssertionCurry {
 	weak var _delegate: AssertionDelegate?
-	func evaluateOnAssertionDelegate(_ query: CustomQuery) -> Result? {
+	func evaluateOnAssertionDelegate(_ query: CustomQuery) -> LogicDerivation? {
 		guard let delegate = _delegate else { return nil }
 		switch query {
-		case let .IsEmptySquare(x, y):
-			return Result(delegate.isEmptySquare(x, y), 1)
-		case let .HasObjectAt(x, y):
-			return Result(delegate.hasObjectAt(x, y), 5)
+		case let .IsUntakenSquare(pathNode, ed):
+			return delegate.isUntakeSquare(pathNode, ed)
+		case let .ShapeNowMove(shapeNode):
+			return delegate.shapeNowMove(shapeNode)
 		default:
 			return nil
 		}
@@ -45,25 +42,31 @@ class AssertionCurry {
 
 extension QueryExander {
 	static func getDerivedCustomPremises(_ query: CustomQuery) -> Premise? {
-		switch query {
-		case let .CanMove(x, y, d):
-			switch (d) {
-			case .UP:
-				return Premise(.IsEmptySquare(x, y + 1))
-			case .RIGHT:
-				return Premise(.IsEmptySquare(x + 1, y))
-			case .DOWN:
-				return Premise(.IsEmptySquare(x, y - 1))
-			case .LEFT:
-				return Premise(.IsEmptySquare(x - 1, y))
-			}
-		default:
-			return nil
-		}
+		return nil
+//		switch query {
+//		case let .
+//			switch (d) {
+//			case .UP:
+//				return Premise(.IsEmptySquare(x, y + 1, d))
+//			case .RIGHT:
+//				return Premise(.IsEmptySquare(x + 1, y, d))
+//			case .DOWN:
+//				return Premise(.IsEmptySquare(x, y - 1, d))
+//			case .LEFT:
+//				return Premise(.IsEmptySquare(x - 1, y, d))
+//			}
+//		default:
+//			return nil
+//		}
 	}
 }
 
 protocol AssertionDelegate: NSObjectProtocol {
-	func isEmptySquare(_ x: IntC, _ y: IntC) -> Bool
-	func hasObjectAt(_ x: IntC, _ y: IntC) -> Bool
+	func shapeNowMove(_ shapeNode: ShapeNode) -> LogicDerivation?
+	func isUntakeSquare(_ pathNode: PathNode, _ direction: Direction) -> LogicDerivation?
+}
+
+enum LogicDerivation {
+	case Result(Result)
+	case Premise(Premise)
 }

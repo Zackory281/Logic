@@ -20,6 +20,10 @@ class Facts: Hashable {
 		return _premises[premise]
 	}
 	
+	func dictionary() -> Dictionary<Premise, Result> {
+		return _premises
+	}
+	
 	/// Adds the evaluated fact to the dictionary.
 	/// - Returns: Wether the premise was successfully inserted, false otherwise.
 	///
@@ -27,6 +31,10 @@ class Facts: Hashable {
 		guard _premises[premise] == nil else { return _premises[premise] == result }
 		_premises[premise] = result
 		return true
+	}
+	
+	func removeAll() {
+		_premises.removeAll()
 	}
 	
 	func printFacts() {

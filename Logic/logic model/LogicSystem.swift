@@ -29,12 +29,24 @@ class LogicSystem {
 		_evaluator.evaluateAll()
 	}
 	
+	func forEveryFact(_ function: (Premise, Result) -> ()) {
+		_evaluator.getFactionary().dictionary().forEach(function)
+	}
+	
+	func clearEvalutations() {
+		_evaluator.clearEvaluations()
+	}
+	
 	func printFacts() {
 		_evaluator.printFacts()
 	}
 	
 	func printPremises() {
 		_evaluator.printPremises()
+	}
+	
+	func printUnevaluatedPremises() {
+		_evaluator.printUnevaluatedPremises()
 	}
 	
 	func printEverything() {

@@ -20,6 +20,12 @@ class TreeGraph<T: Hashable> {
 		_set = Set<T>()
 	}
 	
+	func clearAll() {
+		_roots.removeAll()
+		_rootSet.removeAll()
+		_set.removeAll()
+	}
+	
 	func getParents(_ t: T) -> Set<T>? {
 		return _rootSet[t]
 	}
